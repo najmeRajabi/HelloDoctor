@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">دکتر سلام</string>
     <string name="hello">سلام دنیا</string>
+    <string name="online">آنلاین</string>
+    <string name="name">معصومه بهرامی</string>
+    <string name="send_message">ارسال پیام</string>
+    <string name="model_choose">انتخاب مدل مشاوره</string>
 </resources>
