@@ -11,6 +11,6 @@ class DoctorActivity : AppCompatActivity() {
         binding= ActivityDoctorBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        
+        binding.txv1.text = getString(R.string.hello)
     }
 }
