@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import ir.sample.doctorproject2.databinding.ActivityConsultBinding
-import ir.sample.doctorproject2.databinding.ActivityDoctorBinding
+import com.example.sampleproject.databinding.ActivityConsultBinding
+import com.example.sampleproject.databinding.ActivityDoctorBinding
 
 class ConsultActivity : AppCompatActivity() {
     lateinit var binding : ActivityConsultBinding

@@ -9,6 +9,14 @@ object Hospital{
         Consulatancy(2,14,ConsultancyType.Video,24000),
         Consulatancy(3,17,ConsultancyType.Phone,25000)
     )
+    fun getDoctor(id : Int) : Doctor?{
+        for (doctor in doctorList){
+            if (doctor.id == id){
+                return doctor
+            }
+        }
+        return null
+    }
 
     fun setTestDate(){
         doctorList.clear()

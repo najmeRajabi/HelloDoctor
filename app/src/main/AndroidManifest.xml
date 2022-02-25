@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SampleProject">
         <activity
+            android:name=".AnswerActivity"
+            android:exported="false" />
+        <activity
             android:name=".ConsultActivity"
             android:exported="false" />
         <activity

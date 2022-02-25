@@ -5,4 +5,7 @@
     <string name="name">معصومه بهرامی</string>
     <string name="send_message">ارسال پیام</string>
     <string name="model_choose">انتخاب مدل مشاوره</string>
+    <string name="tell">تلفن</string>
+    <string name="doctorCall">تماس دکتر با من</string>
+    <string name="callsDoctor">دکتر با شما تماس خواهد گرفت</string>
 </resources>
