@@ -16,17 +16,17 @@ import com.example.sampleproject.databinding.ActivityDoctorBinding
 
 class ConsultActivity : AppCompatActivity() {
     lateinit var binding : ActivityConsultBinding
-    var checked:Boolean? = false
+    var checked: BooleanArray? = null
 
     val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val intent = result.data
-                checked = intent?.getBooleanExtra("checked", false)
+                checked = intent?.getBooleanArrayExtra("checked")
                 Toast.makeText(this, "isOk value is : " + checked, Toast.LENGTH_SHORT).show()
                 checked?.let {
-                    if (it)
+                    if (it.contains(false))
                         Toast.makeText(this, "الان دکتر بهت زنگ می زنه", Toast.LENGTH_SHORT).show()
 
                 }
@@ -47,6 +47,13 @@ class ConsultActivity : AppCompatActivity() {
     }
 
     fun initViews() {
+        if (!getFromShared_name().isNullOrBlank()) {
+            binding.editTextName.visibility = View.GONE
+        }
+        if (!getFromShared_tel().isNullOrBlank()) {
+            binding.editTextTel.visibility = View.GONE
+        }
+
         var id = intent.getIntExtra("id" , -1)
         if (id == -1){
             binding.textViewDoctorCalls.text = "ٔدکتر شما پیدا نشد"
@@ -64,7 +71,7 @@ class ConsultActivity : AppCompatActivity() {
 
                 var intent = Intent(this, AnswerActivity::class.java)
                 startForResult.launch(intent)
-                if (checked == true) {
+                if (checked?.contains(false) == false) {
                     Toast.makeText(this, getString(R.string.doctor_calls_you), Toast.LENGTH_SHORT)
                         .show()
                 }

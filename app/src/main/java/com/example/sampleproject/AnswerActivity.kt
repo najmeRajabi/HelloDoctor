@@ -7,7 +7,7 @@ import com.example.sampleproject.databinding.ActivityAnswerBinding
 
 class AnswerActivity : AppCompatActivity() {
     lateinit var binding: ActivityAnswerBinding
-    var checked = false
+    var checked  = arrayListOf<Boolean>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAnswerBinding.inflate(layoutInflater)
@@ -16,7 +16,16 @@ class AnswerActivity : AppCompatActivity() {
 
 
         binding.checkBox1.setOnClickListener{
-            checked = binding.checkBox1.isChecked
+            checked +=( binding.checkBox1.isChecked)
+        }
+        binding.checkBox2.setOnClickListener{
+            checked +=( binding.checkBox2.isChecked)
+        }
+        binding.checkBox3.setOnClickListener{
+            checked +=( binding.checkBox3.isChecked)
+        }
+        binding.checkBox4.setOnClickListener{
+            checked +=( binding.checkBox4.isChecked)
         }
     }
 
