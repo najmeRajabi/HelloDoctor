@@ -26,7 +26,7 @@ class ConsultActivity : AppCompatActivity() {
                 checked = intent?.getBooleanArrayExtra("checked")
                 Toast.makeText(this, "isOk value is : " + checked, Toast.LENGTH_SHORT).show()
                 checked?.let {
-                    if (it.contains(false))
+                    if (!it.contains(false))
                         Toast.makeText(this, "الان دکتر بهت زنگ می زنه", Toast.LENGTH_SHORT).show()
 
                 }

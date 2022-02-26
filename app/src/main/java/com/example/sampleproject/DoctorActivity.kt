@@ -19,7 +19,7 @@ class DoctorActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        chooseDoctor(0)
+//        chooseDoctor(0)
         chooseDoctor(1)
 //        chooseDoctor(2)
 
@@ -51,13 +51,13 @@ class DoctorActivity : AppCompatActivity() {
         binding.priceTxv3.text = cons3.price.toString() +" تومان "
 
         binding.llConsultancy.setOnClickListener {
-            goToConsulate(0)
+            goToConsulate(1)
         }
         binding.llConsultancy2.setOnClickListener {
-            goToConsulate(0)
+            goToConsulate(1)
         }
         binding.llConsultancy3.setOnClickListener {
-            goToConsulate(0)
+            goToConsulate(1)
         }
         val tel = myDoctor.phoneNumber
         binding.callToDrBtn.setOnClickListener { call(tel) }
