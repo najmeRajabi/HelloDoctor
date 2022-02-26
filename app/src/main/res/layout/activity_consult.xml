@@ -11,7 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="@string/name"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:background="@drawable/stork"
+        android:hint="@string/hint_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,6 +25,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/tell"
+        android:padding="10dp"
+        android:inputType="numberDecimal"
+        android:layout_margin="20dp"
+        android:background="@drawable/stork"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,4 +52,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDoctorCalls" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

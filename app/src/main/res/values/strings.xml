@@ -8,4 +8,12 @@
     <string name="tell">تلفن</string>
     <string name="doctorCall">تماس دکتر با من</string>
     <string name="callsDoctor">دکتر با شما تماس خواهد گرفت</string>
+    <string name="checkbox_question">مطمئنی هستید شرایط لازم برای صحبت با دکتر را دارید؟</string>
+    <string name="hint_name">نام</string>
+    <string name="call">تماس با دکتر</string>
+    <string name="info">مشاوره فردی،اضطراب ، افسردگی، شغلی و تحصیلی، استعدغاد یابی ..</string>
+    <string name="doctor_calls_you">دکتر تا چند دقیقه دیگر با شما تماس خواهد گرفت.</string>
+    <string name="question_checkBox2">آیا صحبت های خود را مرور کرده اید؟</string>
+    <string name="question_checkBox3">آیا سوالات خود را آماده کرده اید؟</string>
+    <string name="question_checkBox4">آیا آلارم تلفنتان روشن است؟</string>
 </resources>
