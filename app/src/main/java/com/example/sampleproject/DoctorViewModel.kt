@@ -4,4 +4,7 @@ import androidx.lifecycle.ViewModel
 
 class DoctorViewModel:ViewModel() {
     val doctorList = Hospital.doctorList
+    val consultancyList = Hospital.consultancyList
+
+
 }
