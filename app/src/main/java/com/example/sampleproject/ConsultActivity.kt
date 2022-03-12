@@ -1,7 +1,6 @@
 package com.example.sampleproject
 
 import android.app.Activity
-import android.app.Instrumentation
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -11,14 +10,15 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import com.example.sampleproject.databinding.ActivityConsultBinding
-import com.example.sampleproject.databinding.ActivityDoctorBinding
 
 class ConsultActivity : AppCompatActivity() {
+    private val viewModelDr: DoctorViewModel by viewModels()
     lateinit var binding : ActivityConsultBinding
     var checked: BooleanArray? = null
 
-    val startForResult =
+    private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -40,54 +40,50 @@ class ConsultActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         initViews()
-
-        if(savedInstanceState != null){
-
-        }
     }
 
-    fun initViews() {
-        if (!getFromShared_name().isNullOrBlank()) {
-            binding.editTextName.visibility = View.GONE
-        }
-        if (!getFromShared_tel().isNullOrBlank()) {
-            binding.editTextTel.visibility = View.GONE
-        }
+    private fun initViews() {
+        editTextVisibility()
 
-        var id = intent.getIntExtra("id" , -1)
-        if (id == -1){
+        val index = intent.getIntExtra("index" , -1)
+        if (index == -1){
             binding.textViewDoctorCalls.text = "ٔدکتر شما پیدا نشد"
         }else {
-            var myDoctor = Hospital.getDoctor(id)
-            if (myDoctor?.onlineStatus == OnlineStatus.Offline){
+            val myDoctor =viewModelDr.doctorList[index]
+            if (myDoctor.onlineStatus == OnlineStatus.Offline){
                 binding.textViewDoctorCalls.text = "دکتر ${myDoctor?.name} درحال حاضر آفلاین است و نمی تواند با شما تماس بگیرد."
             }else {
                 binding.textViewDoctorCalls.text = "دکتر ${myDoctor?.name} با شما تماس خواهد گرفت"
             }
-            binding.buttonDrCall.isEnabled  = myDoctor?.onlineStatus == OnlineStatus.Online
+            binding.buttonDrCall.isEnabled  = myDoctor.onlineStatus == OnlineStatus.Online
         }
+
+
         binding.buttonDrCall.setOnClickListener {
             if (tellValidation()) {
 
-                var intent = Intent(this, AnswerActivity::class.java)
+                val intent = Intent(this, AnswerActivity::class.java)
                 startForResult.launch(intent)
                 if (checked?.contains(false) == false) {
                     Toast.makeText(this, getString(R.string.doctor_calls_you), Toast.LENGTH_SHORT)
                         .show()
                 }
 
-                var username = binding.editTextName.text.toString()
-                var userTel = binding.editTextTel.text.toString()
+                val username = binding.editTextName.text.toString()
+                val userTel = binding.editTextTel.text.toString()
 
                 saveInShared(username, userTel)
-
-                if (!getFromShared_name().isNullOrBlank()) {
-                    binding.editTextName.visibility = View.GONE
-                }
-                if (!getFromShared_tel().isNullOrBlank()) {
-                    binding.editTextTel.visibility = View.GONE
-                }
+                editTextVisibility()
             }
+        }
+    }
+
+    private fun editTextVisibility() {
+        if (!getFromShared_name().isNullOrBlank()) {
+            binding.editTextName.visibility = View.GONE
+        }
+        if (!getFromShared_tel().isNullOrBlank()) {
+            binding.editTextTel.visibility = View.GONE
         }
     }
 
@@ -108,17 +104,15 @@ class ConsultActivity : AppCompatActivity() {
         editor.putString("tel" , userTel)
         editor.apply()
     }
-    private fun getFromShared_name() : String?{
+    private fun getFromShared_name(): String? {
         val sharedPreferences: SharedPreferences =
             getSharedPreferences("kotlinSharedPreference", Context.MODE_PRIVATE)
-        var name = sharedPreferences.getString("name" , "")
-        return name
+        return sharedPreferences.getString("name", "")
     }
-    private fun getFromShared_tel() : String?{
+    private fun getFromShared_tel(): String? {
         val sharedPreferences: SharedPreferences =
             getSharedPreferences("kotlinSharedPreference", Context.MODE_PRIVATE)
-        var tel = sharedPreferences.getString("tel" , "")
-        return tel
+        return sharedPreferences.getString("tel", "")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
