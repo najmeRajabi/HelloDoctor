@@ -4,12 +4,11 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.sampleproject.databinding.ActivityDoctorBinding
 
 class DoctorActivity : AppCompatActivity() {
-    val viewModelDr: DoctorViewModel by viewModels()
+    private val viewModelDr: DoctorViewModel by viewModels()
     lateinit var binding: ActivityDoctorBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,9 +58,7 @@ class DoctorActivity : AppCompatActivity() {
         val tel = viewModelDr.doctorList[index].phoneNumber
         binding.callToDrBtn.setOnClickListener { call(tel) }
     }
-    fun goToConsulate(index: Int){
-        val myDoctor =viewModelDr.doctorList[index]
-        Toast.makeText(this , "consultancy is chosen" , Toast.LENGTH_SHORT).show()
+    private fun goToConsulate(index: Int){
         val intent = Intent(this , ConsultActivity::class.java)
         intent.putExtra("index" , index)
         startActivity(intent)
