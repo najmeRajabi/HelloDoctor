@@ -39,6 +39,7 @@ class ConsultActivity : AppCompatActivity() {
         binding = ActivityConsultBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        editTextVisibility()
         initViews()
     }
 
@@ -60,7 +61,7 @@ class ConsultActivity : AppCompatActivity() {
 
 
         binding.buttonDrCall.setOnClickListener {
-            if (tellValidation()) {
+            if (tellValidation() || !getFromShared_tel().isNullOrBlank() ) {
 
                 val intent = Intent(this, AnswerActivity::class.java)
                 startForResult.launch(intent)
@@ -73,7 +74,8 @@ class ConsultActivity : AppCompatActivity() {
                 val userTel = binding.editTextTel.text.toString()
 
                 saveInShared(username, userTel)
-                editTextVisibility()
+                binding.editTextName.visibility = View.GONE
+                binding.editTextTel.visibility = View.GONE
             }
         }
     }
