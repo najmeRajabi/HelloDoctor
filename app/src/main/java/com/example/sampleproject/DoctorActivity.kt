@@ -5,9 +5,11 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.example.sampleproject.databinding.ActivityDoctorBinding
 
 class DoctorActivity : AppCompatActivity() {
+    val viewModelDr: DoctorViewModel by viewModels()
     lateinit var binding: ActivityDoctorBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,24 +21,19 @@ class DoctorActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-//        chooseDoctor(0)
-        chooseDoctor(1)
-//        chooseDoctor(2)
-
-
-
+        chooseDoctor(intent.getIntExtra("index" , 0))
     }
+
     private fun call(tel:String){
         val callIntent = Intent(Intent.ACTION_DIAL)
         callIntent.data = Uri.parse("tel:$tel")
         startActivity(callIntent)
     }
-    fun chooseDoctor(id:Int){
+    fun chooseDoctor(index:Int){
         Hospital.setTestDate()
-        var myDoctor = Hospital.doctorList[id]
-        binding.nameTxv.text = myDoctor.name
-        binding.infoTxv.text = myDoctor.field
-        binding.isConnect.text = myDoctor.onlineStatus.name
+        binding.nameTxv.text = viewModelDr.doctorList[index].name
+        binding.infoTxv.text = viewModelDr.doctorList[index].field
+        binding.isConnect.text = viewModelDr.doctorList[index].onlineStatus.name
 
         var cons1 = Hospital.consultancyList[0]
         binding.callTxv.text = "مشاوره ی تلفنی"+cons1.time+"دقیقه ای"
@@ -51,23 +48,22 @@ class DoctorActivity : AppCompatActivity() {
         binding.priceTxv3.text = cons3.price.toString() +" تومان "
 
         binding.llConsultancy.setOnClickListener {
-            goToConsulate(1)
+            goToConsulate(index)
         }
         binding.llConsultancy2.setOnClickListener {
-            goToConsulate(1)
+            goToConsulate(index)
         }
         binding.llConsultancy3.setOnClickListener {
-            goToConsulate(1)
+            goToConsulate(index)
         }
-        val tel = myDoctor.phoneNumber
+        val tel = viewModelDr.doctorList[index].phoneNumber
         binding.callToDrBtn.setOnClickListener { call(tel) }
     }
-    fun goToConsulate(id: Int){
-        Hospital.setTestDate()
-        var myDoctor = Hospital.doctorList[id]
+    fun goToConsulate(index: Int){
+        val myDoctor =viewModelDr.doctorList[index]
         Toast.makeText(this , "consultancy is chosen" , Toast.LENGTH_SHORT).show()
         val intent = Intent(this , ConsultActivity::class.java)
-        intent.putExtra("id" , myDoctor.id)
+        intent.putExtra("index" , index)
         startActivity(intent)
     }
 }
