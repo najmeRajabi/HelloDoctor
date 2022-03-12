@@ -21,15 +21,18 @@ class DoctorListActivity : AppCompatActivity() {
         val btnDr3 = findViewById<Button>(R.id.btn_doctor3)
         val buttonList = arrayListOf(btnDr1,btnDr2,btnDr3)
         for (i in 0..2){
-            buttonList[i].text = viewModelListDr.doctorList[i].name
-            buttonList[i].setOnClickListener {
-                goToShowInfoActivity()
+            buttonList[i].apply {
+                text = viewModelListDr.doctorList[i].name
+                setOnClickListener {
+                    goToShowInfoActivity(i)
+                }
             }
         }
     }
 
-    private fun goToShowInfoActivity() {
+    private fun goToShowInfoActivity(index:Int) {
         val  intent = Intent(this , DoctorActivity::class.java)
+        intent.putExtra("index" , index)
         startActivity(intent)
     }
 }
