@@ -1,7 +1,17 @@
 package com.example.sampleproject
 
 object Hospital{
-    val doctorList = arrayListOf<Doctor>()
+    val doctorList = arrayListOf<Doctor>(
+        Doctor(1 , "Dr. sara" ,
+            OnlineStatus.Online , "روانشناسی و مشاوره" ,
+            "33352258",R.drawable.doctor_icon),
+        Doctor(2 , "Dr. rostam" ,
+            OnlineStatus.Online , "روانشناسی و مشاوره",
+            "33656598" ),
+        Doctor(3 , "Dr. ali" ,
+            OnlineStatus.Offline , "روانشناسی و مشاوره",
+            "33655952" )
+    )
     val consultancyList = arrayListOf(
         Consultancy(1,12,ConsultancyType.Phone,25000),
         Consultancy(2,14,ConsultancyType.Video,24000),
