@@ -3,7 +3,6 @@ package com.example.sampleproject
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class DoctorAdapter(private val datas :ArrayList<Doctor>) :
@@ -20,7 +19,7 @@ RecyclerView.Adapter<DoctorAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.text_row_item, viewGroup, false)
+            .inflate(R.layout.doctor_list_row, viewGroup, false)
 
         return ViewHolder(view)
     }
