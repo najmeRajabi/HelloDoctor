@@ -9,13 +9,26 @@
     android:background="@color/purple_200">
 
     <TextView
-        android:id="@+id/txv_list_row"
+        android:id="@+id/txv_list_row_dr_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/transform"
+        android:layout_margin="5dp"
+        android:text="@string/name"
+        app:layout_constraintBottom_toBottomOf="@+id/img_doctor"
+        app:layout_constraintEnd_toStartOf="@+id/img_doctor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_doctor" />
+
+    <TextView
+        android:id="@+id/txv_list_onlineStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="5dp"
-        android:text="@string/name"/>
+        android:text="@string/online"
+        app:layout_constraintEnd_toEndOf="@+id/txv_list_row_dr_name"
+        app:layout_constraintStart_toStartOf="@id/txv_list_row_dr_name"
+        app:layout_constraintTop_toBottomOf="@id/txv_list_row_dr_name" />
 
     <ImageView
         android:id="@+id/img_doctor"
