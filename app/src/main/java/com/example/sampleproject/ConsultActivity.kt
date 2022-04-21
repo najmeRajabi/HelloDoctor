@@ -81,11 +81,9 @@ class ConsultActivity : AppCompatActivity() {
     }
 
     private fun editTextVisibility() {
-        if (!getFromShared_name().isNullOrBlank()) {
-            binding.editTextName.visibility = View.GONE
-        }
         if (!getFromShared_tel().isNullOrBlank()) {
             binding.editTextTel.visibility = View.GONE
+            binding.editTextName.visibility = View.GONE
         }
     }
 
