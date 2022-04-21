@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.RecyclerView
 
 class DoctorListActivity : AppCompatActivity() {
     val viewModelListDr :DoctorViewModel by viewModels()
@@ -13,6 +14,16 @@ class DoctorListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_doctor_list)
 
         initButtons()
+        initRecycler()
+    }
+
+    private fun initRecycler() {
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_dr_list)
+        val adapter = DoctorAdapter(viewModelListDr.doctorList)
+
+
+        recyclerView.adapter = adapter
+//        recyclerView.notifyDataSetChange()
     }
 
     private fun initButtons() {
