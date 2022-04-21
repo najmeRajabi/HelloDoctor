@@ -1,21 +1,26 @@
 package com.example.sampleproject
 
+
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 typealias ClickHandler = (doctor:Doctor) -> Unit
 
 class DoctorAdapter(var dataSet :ArrayList<Doctor> ,
                     var clickHandler : ClickHandler ) :
-RecyclerView.Adapter<DoctorAdapter.ViewHolder>(){
+                    ListAdapter<Doctor,DoctorAdapter.ViewHolder>(FlowerDiffCallback){
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val txvDoctorName= view.findViewById<TextView>(R.id.txv_list_row_dr_name)
-        val imgDoctor: ImageView= view.findViewById(R.id.img_doctor)
+        val imgDoctor: ImageView = view.findViewById(R.id.img_doctor)
         val txvOnlineStatus = view.findViewById<TextView>(R.id.txv_list_onlineStatus)
 
         fun bind(doctor: Doctor , clickHandler : ClickHandler ){
@@ -36,9 +41,17 @@ RecyclerView.Adapter<DoctorAdapter.ViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(dataSet[position] , clickHandler)
+        holder.bind(getItem(position) , clickHandler)
     }
 
-    override fun getItemCount() = dataSet.size
+    object FlowerDiffCallback : DiffUtil.ItemCallback<Doctor>() {
+        override fun areItemsTheSame(oldItem: Doctor, newItem: Doctor): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Doctor, newItem: Doctor): Boolean {
+            return oldItem.id == newItem.id
+        }
+    }
 
 }
