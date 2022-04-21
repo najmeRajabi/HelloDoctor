@@ -19,7 +19,9 @@ class DoctorListActivity : AppCompatActivity() {
 
     private fun initRecycler() {
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_dr_list)
-        val adapter = DoctorAdapter(viewModelListDr.doctorList)
+        val adapter = DoctorAdapter(arrayListOf())
+        adapter.dataSet= viewModelListDr.doctorList
+        adapter.notifyDataSetChanged()
 
 
         recyclerView.adapter = adapter

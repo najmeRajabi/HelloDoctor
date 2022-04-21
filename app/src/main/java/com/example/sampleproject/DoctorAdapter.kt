@@ -7,16 +7,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class DoctorAdapter(private val dataSet :ArrayList<Doctor>) :
+class DoctorAdapter(var dataSet :ArrayList<Doctor>) :
 RecyclerView.Adapter<DoctorAdapter.ViewHolder>(){
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView
-        val imageView: ImageView
+        val txvDoctorName= view.findViewById<TextView>(R.id.txv_list_row)
+        val imageView: ImageView= view.findViewById(R.id.img_doctor)
 
-        init {
-            textView = view.findViewById(R.id.txv_list_row)
-            imageView = view.findViewById(R.id.img_doctor)
+        fun bind(doctor: Doctor){
+            txvDoctorName.text = doctor.name
+            doctor.imageId?.let { imageView.setImageResource(it) }
         }
     }
 
@@ -28,8 +28,7 @@ RecyclerView.Adapter<DoctorAdapter.ViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = dataSet[position].name
-        dataSet[position].imageId?.let { holder.imageView.setImageResource(it) }
+        holder.bind(dataSet[position])
     }
 
     override fun getItemCount() = dataSet.size
